@@ -13,12 +13,6 @@
                             <router-link active-class="active" to="/" class="nav-link">Home</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link active-class="active" to="/register" class="nav-link" v-if="isGuest">Register</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link active-class="active" to="/login" class="nav-link" v-if="isGuest">Login</router-link>
-                        </li>
-                        <li class="nav-item">
                             <router-link active-class="active" :to="{name: 'Dashboard'}" class="nav-link" v-if="!isGuest">Dashboard</router-link>
                         </li>
                         <li class="nav-item dropdown" v-if="!isGuest">

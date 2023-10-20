@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -82,6 +83,22 @@ class AuthController extends Controller
             'success' => true,
             'data'    => $user,
             'message' => 'User found.'
+        ]);
+    }
+
+    /**
+     * Get All Roles
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getRoles() : JsonResponse
+    {
+        $roles = Role::all();
+
+        return response()->json([
+            'success' => true,
+            'data'    => $roles,
+            'message' => 'Data found.'
         ]);
     }
 }

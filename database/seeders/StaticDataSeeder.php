@@ -24,7 +24,7 @@ class StaticDataSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'User',
+                'name' => 'Normal User',
             ]
         ]);
 

@@ -1,14 +1,19 @@
 <template>
     <div>
-        <div class="jumbotron">
-            <h1 class="display-3">Eligo Creative Service Assignment</h1>
-            <p class="lead">Images Management System</p>
-            <hr class="my-2">
+        <div class="row mt-2">
+            <div class="col-lg-6">
+                <Register />
+            </div>
+            <div class="col-lg-6">
+                <Login />
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import Register from '../components/Register.vue';
+import Login from '../components/Login.vue';
 
 </script>
 
