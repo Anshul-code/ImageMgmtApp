@@ -18,6 +18,7 @@
 3. Copy .env.example to .env file and update environment variables.Then run `php artisan migrate` to create all table.
 4. Run `php artisan db:seed` to run all Seeders.
 5. Run `php artisan key:generate` if no app key is there in env.
-6. Run `npm run build` to create build for production.
-7. Run `php artisan serve` to locally serve application.
+6. To create new Storage symblink run : `php artisan storage:link`
+7. Run `npm run build` to create build for production.
+8. Run `php artisan serve` to locally serve application.
 
