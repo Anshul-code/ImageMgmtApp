@@ -59,6 +59,8 @@ const errors = ref([]);
 // methods
 const handleLogin = async() => { // Handle User Login on submit
     try{
+        errors.value = [];
+
         const response = await axios.post('/login', form);
        
         if(response) {

@@ -77,7 +77,7 @@ onMounted(() => {
     getCategories();
 });
 
-const getCategories = async() => { // Get Categories list from api
+const getCategories = async() => { // Get Categories list from api    
     try{
         const response = await axios.get('/categories/all');
        
@@ -99,6 +99,8 @@ const getCategories = async() => { // Get Categories list from api
 
 const handleSubmit = async () => { // Submit image form
     try{
+        errors.value = {};
+
         const response = await axios.post('/images/store', form);
        
         if(response) {

@@ -79,7 +79,6 @@ const form = reactive({
     name: '',
     email: '',
     password: '',
-    password_confirmation: '',
     role_id: '',
 });
 

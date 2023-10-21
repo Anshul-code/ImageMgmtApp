@@ -52,8 +52,8 @@ const routes = [
         component: ListImages,
         meta: {
             requiresAuth: true,
+            roleAccess: [1,2],
         },
-        roleAccess: [1,2],
     },
     
 ];
@@ -78,18 +78,18 @@ router.beforeEach((to, from) => {
 
     // Dashboard redirect according to roles
     if(to.name == "Dashboard" && !authStore.isGuest) {
-        if(authStore.user?.role_id == 1) { // Contributor
-            router.push({ name: 'CreateImage' });
+      if(authStore.user.role_id == 1) { // Contributor
+            return { name: 'CreateImage' };
         } else { // Normal User
-            router.push({ name: 'ListImages' });
+            console.log('list');
+            return { name: 'ListImages' };
         }
     }  
 
     // Role Based gaurds
-    if(to.meta.roleAccess && authStore.user){
-        let roleAccess = to.meta.roleAccess;
-        if(!roleAccess.includes(authStore.user.role_id)){
-            return { name: 'Dashboard' };
+    if(to.name !== "Dashboard" && to.meta.roleAccess && !authStore.isGuest){
+        if(to.meta.roleAccess.indexOf(Number(authStore.user.role_id)) < 0){
+            return { name: "Dashboard" };
         }
     }
 });
