@@ -9,8 +9,6 @@
 
 <script setup>
 import Navbar from './layout/elements/Navbar.vue';
-
-
 </script>
 
 <style scoped>

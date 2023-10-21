@@ -94,15 +94,18 @@ const handleRegister = async() => { // Handle User Registeration on submit
     errors.value = [];
 
     try{
-        const response = await axios.post('/api/register', form);
+        const response = await axios.post('/register', form);
        
         if(response) {
             if(response.data.success) {
                 authStore.setToken(response.data.token);
                 authStore.setUser(response.data.user);
+                toastr.success(response.data.message);
 
                 // redirect to dashboard
                 router.push({name: 'Dashboard'});
+            } else {
+                toastr.error(response.data.message);
             }
         }
     } catch (error) {
@@ -117,7 +120,7 @@ const handleRegister = async() => { // Handle User Registeration on submit
 
 const getRoles = async() => { // Get Roles list from api
     try{
-        const response = await axios.get('/api/get-roles');
+        const response = await axios.get('/get-roles');
        
         if(response) {
             if(response.data.success) {

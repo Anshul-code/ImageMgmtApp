@@ -3,6 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Login</h4>
+                
 
                 <!-- Login Form Start -->
                 <form method="post" @submit.prevent="handleLogin()">
@@ -58,22 +59,25 @@ const errors = ref([]);
 // methods
 const handleLogin = async() => { // Handle User Login on submit
     try{
-        const response = await axios.post('/api/login', form);
+        const response = await axios.post('/login', form);
        
         if(response) {
             if(response.data.success) {
                 authStore.setToken(response.data.token);
                 authStore.setUser(response.data.user);
+                toastr.success(response.data.message);
 
                 // Redirect to dashboard
                 router.push({name: 'Dashboard'});
+            } else {
+                toastr.error(response.data.message);
             }
         }
     } catch (error) {
         console.error(error);
 
         if(error) {
-            if(error.response.status == 422) {
+            if(error.response?.status == 422) {
                 errors.value = error.response.data.errors;
             }
         }

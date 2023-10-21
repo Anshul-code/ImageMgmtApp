@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import router from "../router";
 
 export const useAuthStore = defineStore("auth", {
     state: () => {
@@ -6,6 +7,11 @@ export const useAuthStore = defineStore("auth", {
             token: localStorage.getItem('token') || null,
             user: JSON.parse(localStorage.getItem('user')) || null,
         };
+    },
+    getters: {
+        isGuest() {
+            return this.token == null;
+        }
     },
     actions: {
         // Token Actions
@@ -25,6 +31,23 @@ export const useAuthStore = defineStore("auth", {
         removeUser() {
             localStorage.removeItem('user');
             this.user = null;
+        },
+        async logout() {
+            this.removeToken();
+            this.removeUser();
+
+            try{
+                const response = await axios.post('/logout');
+               
+                if(response) {
+                    if(response.data.success) {
+                        // Redirect to Home
+                        router.push({name: 'Home'});
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 });

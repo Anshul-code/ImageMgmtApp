@@ -27,6 +27,8 @@ class AuthController extends Controller
 
         $token = $user->createToken('authtoken')->plainTextToken;
 
+        $user = $user->load('role');
+
         return response()->json([
             'success' => true,
             'token'   => $token,
@@ -43,7 +45,7 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::with('role')->where('email', $request->email)->first();
 
         if ($user == null || !Hash::check($request->password, $user->password)) {
             return response()->json([
@@ -79,6 +81,8 @@ class AuthController extends Controller
             ]);
         }
         
+        $user = $user->load('role');
+
         return response()->json([
             'success' => true,
             'data'    => $user,
@@ -99,6 +103,25 @@ class AuthController extends Controller
             'success' => true,
             'data'    => $roles,
             'message' => 'Data found.'
+        ]);
+    }
+
+    /**
+     * Delete tokens and logout
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request) : JsonResponse
+    {
+        $user = auth('sanctum')->user();
+
+        if($user) {
+            $user->currentAccessToken()->delete();
+        }
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Logged Out.'
         ]);
     }
 }
