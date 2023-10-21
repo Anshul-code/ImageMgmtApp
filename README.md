@@ -16,7 +16,8 @@
 1. After cloning the repository, Run `composer install` to install all php dependencies.
 2. Run `npm install` to install node_modules
 3. Copy .env.example to .env file and update environment variables.Then run `php artisan migrate` to create all table.
-4. Run `php artisan key:generate` if no app key is there in env.
-5. Run `npm run build` to create build for production.
-6. Run `php artisan serve` to locally serve application.
+4. Run `php artisan db:seed` to run all Seeders.
+5. Run `php artisan key:generate` if no app key is there in env.
+6. Run `npm run build` to create build for production.
+7. Run `php artisan serve` to locally serve application.
 
